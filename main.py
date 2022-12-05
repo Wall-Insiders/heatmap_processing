@@ -13,4 +13,7 @@ df = pd.read_csv('studs_found1.csv', index_col=False, dtype=int, header=0)
 
 # Display heatmap
 heat = sns.heatmap(df)
+heat.axes.set_xlabel("Length of Wall (inches per tick)")
+heat.axes.set_ylabel("Height of Wall (inches per tick)")
+heat.axes.set_title("Heatmap Testing")
 plt.show()
