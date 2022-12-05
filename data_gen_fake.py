@@ -5,7 +5,7 @@ import random
 import numpy as np
 
 headers = ['x', 'y', 'stud_found']
-data = np.empty([16,3], dtype=int)
+data = np.empty([8640,3], dtype=int)
 #print(data)
 
 # Generate random number from x(0,71) and y(0,119) (A regular 6 foot by 12 foot wall)
@@ -25,9 +25,13 @@ for x in range(0, 16, 4):
         temp_x += 1
         data[x+y+1] = [temp_x, temp_y, 1]
 
+#for data in range(16,8640,1):
+    #for x in range(0,71):
+
+
 #print(data)
 # Save coordinates to .csv file
-with open('studs_found.csv', 'w', encoding='UTF8', newline='') as f:
+with open('studs_found1.csv', 'w', encoding='UTF8', newline='') as f:
     writer = csv.writer(f)
 
     # write the header
