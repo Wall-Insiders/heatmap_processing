@@ -5,15 +5,19 @@ import random
 import numpy as np
 import pandas as pd
 
+# Wall dimensions
+length = 72
+width = 120
+
 # Initialize an empty Numpy array
-data = np.empty([120,72], dtype=int)
+data = np.empty([width,length], dtype=int)
 
 # Set all data points not equal to 0 to 0
 data[data != 0] = 0
 
-# Generate random number from x(0,71) and y(0,119) (A regular 6 foot by 12 foot wall)
-x_values = list(range(72))
-y_values = list(range(120))
+# Generate random number from x(0,71) and y(0,119) (A regular 6 foot by 10 foot wall)
+x_values = list(range(length))
+y_values = list(range(width))
 
 # Random number generate 4 (x,y) coordinates with a z standard stud length
 for x in range(4):
@@ -25,10 +29,11 @@ for x in range(4):
 
 # Expand the 4 coordinates by (x+1,y) of 4 iterations (2x4 stud dimension)
     for y in range(4):
-        data[:, temp_x+y] = 1
+        if(temp_x + y <= length):
+            data[:, temp_x+y] = 1
 
 # Save coordinates to .csv file
-with open('studs_found1.csv', 'w', encoding='UTF8', newline='') as f:
+with open('studs_found2.csv', 'w', encoding='UTF8', newline='') as f:
     writer = csv.writer(f)
 
     # write the header
