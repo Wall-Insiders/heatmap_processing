@@ -1,12 +1,11 @@
 import Modules.database_gen_sqlite as gen
 
-def main():
+if __name__ == '__main__':
 
-    # Generates an empty database 
-    gen.gen_data()
+    # Simulation Parameters
+    width = 480
+    length = 120
+    num_stud = 25
 
-    # Generates a database called "coords.db"
-    gen.gen_data("coords", 120, 120, 35)
-    return 0
-
-main()
+    # Database generation
+    gen.gen_data("stud_finder", width, length, num_stud, truncate=True)

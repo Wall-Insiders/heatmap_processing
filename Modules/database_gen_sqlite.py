@@ -3,8 +3,8 @@ import random
 import os
 
 # Generates random stud location data and saves it into a database
-def gen_data(database_name = "test", wall_width = 0, wall_length = 0, stud_count = 0):
-    x_values, y_values = list(range(wall_length)), list(range(wall_width))
+def gen_data(database_name = "test", wall_width = 0, wall_length = 0, stud_count = 0, truncate = False):
+    # Array to keep coordinates
     coords = []
 
     # Generates folder for database
@@ -16,13 +16,21 @@ def gen_data(database_name = "test", wall_width = 0, wall_length = 0, stud_count
     # Creates cursor for query commands
     cur = con.cursor()
 
-    # Creates a table called studs with 4 columns
-    cur.execute("CREATE TABLE stud_locations(x, y)")
+    # Check if table exists 
+    cur.execute("SELECT count(name) FROM sqlite_master WHERE type='table' AND name='stud_locations'")
 
-    # Generate 1000 stud locations
+    # Table does not exist
+    if(not(cur.fetchone()[0])):
+        # Creates a table called studs with 4 columns
+        cur.execute("CREATE TABLE stud_locations(x, y)")
+
+    # Truncate the data if needed
+    if(truncate):
+        cur.execute("DELETE FROM stud_locations")
+
+    # Generate stud locations
     for x in range(stud_count):
-        temp_x = random.choice(x_values)
-        temp_y = random.choice(y_values)
+        temp_x, temp_y = random.randint(0, wall_length), random.randint(0, wall_width)
         coords.append(tuple(list((temp_x, temp_y))))
 
     con.executemany("INSERT INTO stud_locations VALUES(?, ?)", coords)
