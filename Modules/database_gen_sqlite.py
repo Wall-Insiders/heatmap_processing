@@ -8,10 +8,10 @@ def gen_data(database_name = "test", wall_width = 0, wall_length = 0, stud_count
     coords = []
 
     # Generates folder for database
-    database_folder_path = gen_folder()
+    database_folder_path = gen_folder() + database_name + ".db"
 
     # Creates database file called "test"
-    con = sqlite3.connect(database_folder_path + database_name + ".db")
+    con = sqlite3.connect(database_folder_path)
 
     # Creates cursor for query commands
     cur = con.cursor()
@@ -37,7 +37,7 @@ def gen_data(database_name = "test", wall_width = 0, wall_length = 0, stud_count
     con.commit()
     con.close()
 
-    return 0
+    return database_folder_path
 
 # Generates folder for database returns path of database folder
 def gen_folder():
