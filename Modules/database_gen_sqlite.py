@@ -3,7 +3,7 @@ import random
 import os
 
 # Generates random stud location data and saves it into a database
-def gen_data(database_name = "test", wall_width = 0, wall_length = 0, stud_count = 0, truncate = False):
+def gen_data(database_name = "test", wall_width = 0, wall_height = 0, stud_count = 0, truncate = False):
     # Array to keep coordinates
     coords = []
 
@@ -30,7 +30,7 @@ def gen_data(database_name = "test", wall_width = 0, wall_length = 0, stud_count
 
     # Generate stud locations
     for x in range(stud_count):
-        temp_x, temp_y = random.randint(0, wall_length), random.randint(0, wall_width)
+        temp_x, temp_y = random.randint(0, wall_height), random.randint(0, wall_width)
         coords.append(tuple(list((temp_x, temp_y))))
 
     con.executemany("INSERT INTO stud_locations VALUES(?, ?)", coords)
