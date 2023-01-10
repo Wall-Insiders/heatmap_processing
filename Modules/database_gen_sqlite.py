@@ -46,8 +46,10 @@ def gen_data(database_name = "test", wall_width = 0, wall_height = 0, stud_count
 
     date = datetime.date.today()
     time = datetime.datetime.now()
+    curr_time = time.strftime("%H:%M:%S")
+    curr_date = date.strftime("%m/%d/%y")
 
-    session_data = (session_ID, date, time)
+    session_data = (session_ID, curr_date, curr_time)
 
     # Insert into table sessions
     cur.execute("INSERT INTO sessions VALUES (?, ?, ?)", session_data)
